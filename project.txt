@@ -1,0 +1,67 @@
+Here is the complete, step-by-step roadmap to building and deploying **Scarlet Spots** (your Rutgers study space finder) from scratch using **React, TypeScript, Tailwind CSS, JSON, GitHub, and Vercel**.
+
+1. **Initialize Project & GitHub Repository:** Make sure Node.js is installed on your computer.
+Open your terminal and run the Vite command to set up React with TypeScript:
+
+```bash
+npm create vite@latest scarlet-spots -- --template react-ts
+cd scarlet-spots
+npm install
+
+```
+
+Install Tailwind CSS for rapid styling:
+
+```bash
+npm install -D tailwindcss @tailwindcss/vite
+
+```
+
+Add `@import "tailwindcss";` to the top of your `src/index.css` file. Initialize a git repository (`git init`), commit your initial files, and push the project to a new public repository on GitHub.
+
+
+2. **Define Types & Create the Mock JSON Data:**
+Create a `src/types.ts` file to define the shape of your data so TypeScript can catch bugs early:
+
+```typescript
+export interface StudySpot {
+  id: string;
+  name: string;
+  campus: 'College Ave' | 'Busch' | 'Livingston' | 'Cook/Douglass';
+  noiseLevel: 'Silent' | 'Quiet' | 'Moderate' | 'Loud';
+  hasOutlets: boolean;
+  hasWhiteboards: boolean;
+  hours: string;
+  description: string;
+}
+
+```
+
+Next, create a `src/data/spots.json` file and populate it with 10–15 real Rutgers locations (e.g., Alexander Library, Life Sciences Building, Busch Student Center) matching your interface.
+
+
+3. **Build Static UI Components:**
+Break your application down into clean, reusable components inside a `src/components/` folder:
+
+* **Navbar / Header:** Features Rutgers Scarlet branding (`#CC0033`) and a tagline.
+* **SpotCard:** Receives a single study spot object as a prop and displays its name, campus badge, hours, and amenity icons (outlets, whiteboards).
+* **App.tsx:** Import your JSON data and `.map()` over the array to render a responsive CSS grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`).
+
+
+4. **Add Interactivity & Filtering State:**
+Bring your app to life using React's `useState` hook:
+
+* Create state variables for `selectedCampus` and `searchQuery`.
+* Filter your spots array dynamically before rendering the grid so cards update live as the user types or clicks campus filter tabs.
+* *(Optional)* Add a bookmarking feature that saves favorite spot IDs to browser `localStorage` so they persist on page refresh.
+
+
+5. **Deploy Live to Vercel:**
+Log into Vercel using your GitHub account, click **Add New Project**, and import your `scarlet-spots` repository. Vercel will automatically detect Vite, configure the build settings (`npm run build`), and deploy your app to a live URL (`your-project.vercel.app`) in under a minute.
+
+
+---
+
+
+Rishabh: initialize project and GitHub repository, do the interactivty and filtering state, deploy to vercel
+Prabhas: static UI components, define types and create JSON data, deploy to vercel
